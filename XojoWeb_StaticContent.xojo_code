@@ -37,7 +37,11 @@ Protected Module XojoWeb_StaticContent
 		  End If
 		  
 		  // We got this far which means there is a file that matches this request path. Let's set the request MIME type.
-		  Request.MIMEType = MIMEType
+		  If (_fileInFolder.Name.Lowercase().Right(4) = ".css") Then
+		    Request.MIMEType = "text/css"
+		  Else
+		    Request.MIMEType = MIMEType
+		  End If
 		  
 		  // We should also update the status code because some browsers are picky about this.
 		  Request.Status = 200 // HTTP OK
