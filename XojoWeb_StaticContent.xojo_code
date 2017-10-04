@@ -22,6 +22,9 @@ Protected Module XojoWeb_StaticContent
 		    _folderPath = _folderPath + "/"
 		  #EndIf
 		  
+		  Dim _fullPath As String
+		  _fullPath = _folderPath + _filePath
+		  
 		  Dim _fileInFolder As FolderItem
 		  _fileInFolder = GetFolderItem(_folderPath + _filePath, FolderItem.PathTypeNative)
 		  
@@ -35,6 +38,9 @@ Protected Module XojoWeb_StaticContent
 		  
 		  // We got this far which means there is a file that matches this request path. Let's set the request MIME type.
 		  Request.MIMEType = MIMEType
+		  
+		  // We should also update the status code because some browsers are picky about this.
+		  Request.Status = 200 // HTTP OK
 		  
 		  // Read the file contents and append to the request.
 		  Dim _fileStream As BinaryStream
